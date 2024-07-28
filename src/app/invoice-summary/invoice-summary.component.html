@@ -1,0 +1,71 @@
+<!--
+  Title: invoice-summary.component.html
+  Authors: Phuong Tran
+  Date: 07/21/2024
+  Updated: 07/21/2024 by Brock Hemsouvanh
+  Description: Invoice Summary component template for BCRS application
+-->
+
+<div class="container" id="invoice">
+  <h1>Invoice</h1>
+  <h2 class="header">Order #{{ order.id }}</h2>
+  <div class="order-date header">
+    <h5>Date</h5>
+    {{ order.date | date}}
+  </div>
+
+  <!--the submitted email-->
+  <div>
+    <h5>Email</h5>
+    {{order.email}}
+  </div>
+
+  <!--firstName submitted by user-->
+  <div class="firstName">
+    <h5>First Name</h5>
+    {{order.firstName}}
+  </div>
+
+  <div class="lastName">
+    <h5>Last Name</h5>
+    {{order.lastName}}
+  </div>
+
+
+  <hr>
+
+  <div class="order-summary">
+    <h4>Order Summary</h4>
+    <div *ngFor="let item of order.menuItems">
+      <div>
+        {{item.name}}
+      </div>
+      <div> {{item.price | currency}}</div>
+    </div>
+
+    <div>
+      <h5>Parts</h5>
+      <div>
+        {{order.parts | currency}}
+      </div>
+    </div>
+
+    <div>
+      <h5>Labor(in hours)</h5>
+      <div>
+        {{ order.labor}}
+      </div>
+    </div>
+
+    <hr>
+    <div class="order-total">
+      <h5>Order Total</h5>
+      <div>
+        {{order.orderTotal | currency}}
+      </div>
+    </div>
+
+    <button (click)="printInvoice()" class="btn">Print</button>
+  </div>
+</div>
+

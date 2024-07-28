@@ -1,0 +1,78 @@
+<!--
+  Title: service-request.component.html
+  Authors: Brock Hemsouvanh, Phuong Tran
+  Date: 07/07/2024
+  Updated: 07/26/2024 by Brock Hemsouvanh
+  Description: Service Request component template for BCRS application
+-->
+<br>
+<br>
+<br>
+<div>
+<br>
+
+<form #orderForm="ngForm"   >
+  <h1>Bob's Computer Repair Shop</h1>
+  <!-- Input field for email -->
+   <div class="container">
+    <h2>Create Invoice</h2>
+    <div class="email">
+      <label for="email" class="email-title">Customer Email</label>
+      <input type="text" placeholder="Email" id="email" name="email" class="form-control" 
+              [(ngModel)]="order.email" #email="ngModel" required>
+      <div class="required" *ngIf="email.errors?.['required']">*Required</div>
+      <div class="required" *ngIf="email.errors?.['email']">Invalid email format.</div>
+    </div>
+      
+    <!--First name input field-->
+    <div class="firstName">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="order.firstName" #firstName="ngModel" placeholder="First Name" required>
+      <div class="required" *ngIf="firstName.errors?.['required']">*Required</div>
+    </div>
+
+    <!-- Last name input field-->
+    <div class="lastName">
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="order.lastName" #lastName="ngModel" placeholder="Last Name" required>
+      <div class="required" *ngIf="lastName.errors?.['required']">*Required</div>
+    </div>
+    </div>
+    <div class="product-container">
+      <div class="products" *ngFor="let product of products">
+        <input type="checkbox" [value]="product.price" [(ngModel)]="product.checked" [name]="product.name"> {{ product.name }} - {{ product.price | currency:'USD' }}
+      </div>
+    </div>
+
+
+
+    <br />
+
+    <div class="parts-labor-container">
+      <label for="parts-labor">Parts</label><br />
+      <input type="number" class="form-control" id="parts" name="parts" [(ngModel)]="order.parts"><br>
+
+      <label for="parts-labor">Labor($50 an hour)</label><br />
+      <input type="number" class="form-control" id="labor" name="labor" [(ngModel)]="order.labor">
+
+    <br />
+
+    <div>
+      <button class="btn" type="submit" id="submit" value="Place Order">
+        <span *ngIf="!isLoading">Create Service Request</span>
+        <div *ngIf="isLoading">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...
+        </div>
+      </button>
+    </div>
+
+
+
+  
+
+
+
+</div>
+
+</form>
+</div>
